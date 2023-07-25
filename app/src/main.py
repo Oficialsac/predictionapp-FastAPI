@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from auth import router
+from ml_models import ml_router
+from auth import auth_router
 from starlette.middleware.cors import CORSMiddleware
 from constants import *
 
@@ -14,7 +15,8 @@ app.add_middleware(
     allow_headers = ["*"]
 )
 
-app.include_router(router.router, prefix='/api/auth', tags=['auth'])
+app.include_router(auth_router.router, prefix='/api/auth', tags=['auth'])
+app.include_router(ml_router.router, prefix='/api/data', tags=['data'])
 
 
 @app.get('/')

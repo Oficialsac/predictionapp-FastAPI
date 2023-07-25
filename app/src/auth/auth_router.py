@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from auth.schemas import User
 from auth.service import *
+
 router = APIRouter()
 
 @router.get('/users')
