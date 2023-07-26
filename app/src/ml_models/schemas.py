@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+ cd from pydantic import BaseModel
 
 class PredictionVariables(BaseModel):
     wheelbase: float
