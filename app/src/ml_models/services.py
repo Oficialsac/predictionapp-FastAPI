@@ -17,7 +17,12 @@ def get_prediction(variables: PredictionVariables):
         ], columns=variables_dictionary.keys())
         
         results_to_predictions = model_to_predict.predict(X)
-        return results_to_predictions
+        print(results_to_predictions)
+        return {
+                "coef_": list(model_to_predict.coef_), 
+                "intercept": model_to_predict.intercept_, 
+                "predictions": results_to_predictions[0]
+                }
     
     
 def upload_file(file: UploadFile):

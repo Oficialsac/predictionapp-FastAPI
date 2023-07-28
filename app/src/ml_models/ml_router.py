@@ -7,7 +7,7 @@ router = APIRouter()
 
 @router.post('/prediction')
 def create_prediction(variablesValues: PredictionVariables):
-    return {"values": get_prediction(variablesValues)[0]}
+    return get_prediction(variablesValues)
 
 @router.post("/training", response_class=HTMLResponse)
 def training_data(file: UploadFile):
