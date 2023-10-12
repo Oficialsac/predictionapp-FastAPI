@@ -13,7 +13,7 @@ def read_ml_model():
     
     
 def dataframe_to_html(dataframe: pd.DataFrame):
-    return dataframe.head(10).to_html()
+    return dataframe.head(50).to_json()
 
 
 def save_data(file: UploadFile) -> str:

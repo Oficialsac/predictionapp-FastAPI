@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from ml_models import ml_router
+from admin import admin_route
 from auth import auth_router
 from starlette.middleware.cors import CORSMiddleware
 from constants import *
@@ -17,6 +18,7 @@ app.add_middleware(
 
 app.include_router(auth_router.router, prefix='/api/auth', tags=['auth'])
 app.include_router(ml_router.router, prefix='/api/data', tags=['data'])
+app.include_router(admin_route.router, prefix='/api/admin', tags=['admin'])
 
 
 @app.get('/')

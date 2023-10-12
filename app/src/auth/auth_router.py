@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from auth.schemas import User
+from .schemas import User, LoginItem
 from auth.service import *
 
 router = APIRouter()
@@ -15,7 +15,7 @@ def user_register(userdata: User):
 
 
 @router.post('/login')
-def user_login(userdata: User):
+def user_login(userdata: LoginItem):
     user = get_user_by_username(userdata)
     return user
     

@@ -1,18 +1,62 @@
 [
-    {
-      "username": "username1",
-      "password": "123",
-      "role": "admin"
-    },
-    {
-      "username": "username2",
-      "password": "123",
-      "role": "user"
-
-    },
-    {
-      "username": "username3",
-      "password": "123",
-      "role": "admin"
-    }
+  {
+    "email": "juan.perez@example.com",
+    "username": "juanperez",
+    "password": "123",
+    "role": "admin"
+  },
+  {
+    "email": "laura.gomez@example.com",
+    "username": "lauragomez",
+    "password": "123",
+    "role": "user"
+  },
+  {
+    "email": "carlos.lopez@example.com",
+    "username": "carloslopez",
+    "password": "123",
+    "role": "user"
+  },
+  {
+    "email": "maria.rodriguez@example.com",
+    "username": "mariarodriguez",
+    "password": "123",
+    "role": "user"
+  },
+  {
+    "email": "andres.martinez@example.com",
+    "username": "andresmartinez",
+    "password": "123",
+    "role": "user"
+  },
+  {
+    "email": "luisa.hernandez@example.com",
+    "username": "luisahernandez",
+    "password": "123",
+    "role": "user"
+  },
+  {
+    "email": "jose.gonzalez@example.com",
+    "username": "josegonzalez",
+    "password": "123",
+    "role": "user"
+  },
+  {
+    "email": "ana.lopez@example.com",
+    "username": "analopez",
+    "password": "123",
+    "role": "user"
+  },
+  {
+    "email": "carolina.molina@example.com",
+    "username": "carolinamolina",
+    "password": "123",
+    "role": "user"
+  },
+  {
+    "email": "david.sanchez@example.com",
+    "username": "davidsanchez",
+    "password": "123",
+    "role": "user"
+  }
 ]

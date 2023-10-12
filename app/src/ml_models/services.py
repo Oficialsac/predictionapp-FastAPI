@@ -1,5 +1,6 @@
 import pandas as pd
 from fastapi import UploadFile
+from fastapi.responses import JSONResponse
 from ml_models.schemas import PredictionVariables
 from ml_models.utils import *
 from .notebooks.procesingData import *
@@ -29,17 +30,17 @@ def upload_file(file: UploadFile):
     if (file.content_type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" or file.content_type == "text/csv"):
         file_location = save_data(file)
         if( file.content_type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"):
-            df = pd.read_excel(file_location)
+            df = pd.read_excel(file_location, engine="openpyxl")
             pr = procesingData(df=df)
             dataset = pr.imputeData()
             
-            return  dataframe_to_html(dataset)
+            return  JSONResponse(content={"data": dataset.head(10).to_json()})
         elif (file.content_type == "text/csv"):
             df = pd.read_csv(file_location)
             pr = procesingData(df=df)
             dataset = pr.imputeData()
             
-            return dataframe_to_html(dataset)
+            return JSONResponse(content={"data": dataset.head(10).to_json()})
     else: 
         return '<h1> ARCHIVO NO VALIDO <h1/>'
     
