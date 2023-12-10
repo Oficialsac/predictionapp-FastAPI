@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pandas
+matplotlib
+numpy
+seaborn
+statsmodels
+skforecast
+pmdarima
+python-multipart
