@@ -85,3 +85,10 @@ def training_model_service():
             print('NO HAY DATA')
     except Exception as e:
         print(e)
+
+
+
+def get_statistics_service():
+    datos = obj.descriptive_analysis('graduados')
+    return JSONResponse(content=datos)
+    

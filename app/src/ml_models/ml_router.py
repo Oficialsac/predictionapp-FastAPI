@@ -1,10 +1,14 @@
 from fastapi import APIRouter, UploadFile
 from fastapi.responses import HTMLResponse, JSONResponse
 from ml_models.schemas import PredictionVariables
-from ml_models.services import get_prediction, upload_file, training_model_service
+from ml_models.services import get_prediction, upload_file, training_model_service, get_statistics_service
 import json
 
 router = APIRouter()
+
+@router.post('/statistics')
+def get_statistics():
+    return get_statistics_service()
 
 @router.post('/prediction')
 def create_prediction(variablesValues: PredictionVariables):

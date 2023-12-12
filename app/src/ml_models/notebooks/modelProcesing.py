@@ -41,6 +41,7 @@ class DataModelProcessing:
             self.dataset = pd.read_csv(file_path, encoding='ISO-8859-1')
             file_name = file_name.split('_')[1]
             self.datasets[file_name] = self.dataset
+            
                 
     def filter_dep(self, df, programa: str = None):
         """
@@ -252,3 +253,49 @@ class DataModelProcessing:
         time_interval = self.generar_intervalo(dataset_index, STEPS)
 
         return pd.DataFrame(results).set_index(pd.to_datetime(time_interval))
+    
+    def descriptive_analysis(self, DATA_NAME: str):
+        data_options = {'inscritos', 'matriculados', 'admitidos', 'graduados'}
+            
+        if DATA_NAME not in data_options:
+            raise ValueError("Data parameter does not exist, expected 'inscritos', 'matriculados', 'admitidos', 'graduados'")
+            
+        dict_to_return = {}
+
+        ch1 = self.datasets[DATA_NAME].groupby(['nom_ies']).agg({'conteo':'sum'}).head(20)
+        dict_ch1 = {
+            'index': ch1.index.tolist(),
+            'values': ch1['conteo'].tolist()
+        }   
+
+        ch2 = self.datasets[DATA_NAME].groupby(['prog_aca']).agg({'conteo':'sum'}).head(20)
+        dict_ch2 = {
+            'index': ch2.index.tolist(),
+            'values': ch2['conteo'].tolist()
+        } 
+        
+        
+        
+        ch3 = self.datasets[DATA_NAME].groupby(['sem']).agg({'conteo':'sum'}).head(20)
+        dict_ch3 = {
+            'index': ch3.index.tolist(),
+            'values': ch3['conteo'].tolist()
+        } 
+        
+        
+        ch4 = self.datasets[DATA_NAME].groupby(['nom_dep']).agg({'conteo':'sum'}).head(20)
+        dict_ch4 = {
+            'index': ch4.index.tolist(),
+            'values': ch4['conteo'].tolist()
+        } 
+                
+        dict_to_return = {
+            'chart1': dict_ch1,
+            'chart2': dict_ch2,
+            'chart3': dict_ch3,
+            'chart4': dict_ch4,
+        }
+            
+        return dict_to_return
+            
+    
