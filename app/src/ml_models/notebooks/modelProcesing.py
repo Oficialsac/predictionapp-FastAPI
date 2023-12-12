@@ -42,7 +42,19 @@ class DataModelProcessing:
             file_name = file_name.split('_')[1]
             self.datasets[file_name] = self.dataset
             
-                
+    
+    def normalize_nom_dep(self, data):    
+        try:
+            with open('../notebooks/rows.json', encoding='utf-8', errors='ignore') as f:
+                datos_json = json.load(f)    
+            
+            datos_json['data'] = datos_json['data'][:-10]
+            code_dep_to_nom_dep = {int(row[8]): row[10] for row in datos_json['data']}
+            data['nom_dep'] = data['code_dep'].map(code_dep_to_nom_dep)
+            return data
+        except Exception as e:
+            print(e)
+        
     def filter_dep(self, df, programa: str = None):
         """
         Filtra el conjunto de datos por departamento y, opcionalmente, por programa académico.
@@ -255,6 +267,7 @@ class DataModelProcessing:
         return pd.DataFrame(results).set_index(pd.to_datetime(time_interval))
     
     def descriptive_analysis(self, DATA_NAME: str):
+        print(DATA_NAME)
         data_options = {'inscritos', 'matriculados', 'admitidos', 'graduados'}
             
         if DATA_NAME not in data_options:
@@ -262,13 +275,13 @@ class DataModelProcessing:
             
         dict_to_return = {}
 
-        ch1 = self.datasets[DATA_NAME].groupby(['nom_ies']).agg({'conteo':'sum'}).head(20)
+        ch1 = self.datasets[DATA_NAME].groupby(['nom_ies']).agg({'conteo':'sum'}).sort_values(by='conteo', ascending=False).head(10)
         dict_ch1 = {
             'index': ch1.index.tolist(),
             'values': ch1['conteo'].tolist()
         }   
 
-        ch2 = self.datasets[DATA_NAME].groupby(['prog_aca']).agg({'conteo':'sum'}).head(20)
+        ch2 = self.datasets[DATA_NAME].groupby(['prog_aca']).agg({'conteo':'sum'}).sort_values(by='conteo', ascending=False).head(20)
         dict_ch2 = {
             'index': ch2.index.tolist(),
             'values': ch2['conteo'].tolist()
@@ -276,14 +289,14 @@ class DataModelProcessing:
         
         
         
-        ch3 = self.datasets[DATA_NAME].groupby(['sem']).agg({'conteo':'sum'}).head(20)
+        ch3 = self.datasets[DATA_NAME].groupby(['sem']).agg({'conteo':'sum'}).sort_values(by='conteo', ascending=False).head(20)
         dict_ch3 = {
             'index': ch3.index.tolist(),
             'values': ch3['conteo'].tolist()
         } 
         
         
-        ch4 = self.datasets[DATA_NAME].groupby(['nom_dep']).agg({'conteo':'sum'}).head(20)
+        ch4 = self.datasets[DATA_NAME].groupby(['nom_dep']).agg({'conteo':'sum'}).sort_values(by='conteo', ascending=False).head(20)
         dict_ch4 = {
             'index': ch4.index.tolist(),
             'values': ch4['conteo'].tolist()
